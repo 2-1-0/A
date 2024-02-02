@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color and Letter Changing Website</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 1s ease;
+        }
+
+        .change-info {
+            font-size: 100px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setInterval(changeContent, 2000);
+            setInterval(changeColor, 2000);
+        });
+
+        function changeContent() {
+            const body = document.body;
+            const randomLetter = getRandomLetter();
+            const changeInfo = document.createElement("div");
+            changeInfo.classList.add("change-info");
+            changeInfo.innerText = `${randomLetter}`;
+            
+            // Remove any existing change info
+            const existingChangeInfo = document.querySelector(".change-info");
+            if (existingChangeInfo) {
+                existingChangeInfo.remove();
+            }
+
+            body.appendChild(changeInfo);
+        }
+
+        function changeColor() {
+            const body = document.body;
+            const randomColor = getRandomColor();
+            body.style.backgroundColor = randomColor;
+        }
+
+        function getRandomLetter() {
+            const alphabet = "αβγδεζηθικλμνξοπρσςτυφχψω";
+            return alphabet[Math.floor(Math.random() * alphabet.length)];
+        }
+
+        function getRandomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
